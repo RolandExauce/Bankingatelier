@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+
+    <link rel="icon" type="image/svg" th:href="@{/images/atelierSVG.svg}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/dashboard.css}">
+
+    <!--
+        <link rel="icon" type="image/svg" href="/images/atelierSVG.svg" />
+    <link rel="stylesheet" type="text/css" href="/static/css/dashboard.css">
+    -->
+</head>
+
+<body>
+<div>
+    <!-- simple navbar -->
+    <nav class="navbar">
+        <h1>@BankingAtelier</h1>
+        <div class="navbar-logout">
+            <button onclick="logout()">Logout</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Hello, welcome back <span id="loggedInUsername" style="color:#DB0000;"></span></h1>
+        <h2>Your current balance is:
+            <span id="userBalance" style="color: #343434;"></span>
+            <span style="color: #343434;">€</span>
+        </h2>
+
+        <!-- button container -->
+        <div class="button-container">
+            <!-- Withdraw form -->
+            <form id="withdrawForm">
+                <input type="text" name="amount" class="amount-inputs" placeholder="Amount to withdraw" />
+                <button type="button" onclick="withdraw()">Withdraw</button>
+            </form>
+            <!-- Deposit form -->
+            <form id="depositForm">
+                <input type="text" name="amount" class="amount-inputs" placeholder="Amount to deposit" />
+                <button type="button" onclick="deposit()">Deposit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- pull the jquery library -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+    var userId; // store user ID
+    $(document).ready(function () {
+        // Retrieve user ID
+        $.ajax({
+            type: "GET",
+            url: "/home/auth",
+          success: function (response) {
+            //console.log("Response from server:", response); // Update UI with logged-in user's information
+            $("#loggedInUsername").text(response.username);
+            $("#userBalance").text(response.userBalance);
+            userId = response.userId; // Store user ID
+            userBalance = response.userBalance; //Store user balance
+        },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
+    });
+
+
+//withdraw method
+  function withdraw() {
+    $.ajax({
+        type: "POST",
+        url: "/home/" + userId + "/withdraw",
+        data: $("#withdrawForm").serialize(),
+        success: function (response) {
+           // Update new user balance
+           console.log("new user balance response withdraw: ", response );
+            var newUserBalance = response.newUserBalance;
+            $("#userBalance").text(newUserBalance);
+        },
+        error: function (xhr, status, error) {
+            console.error(error);
+        }
+    });
+}
+
+//deposit method
+    function deposit() {
+        $.ajax({
+            type: "POST",
+            url: "/home/" + userId + "/deposit",
+            data: $("#depositForm").serialize(),
+            success: function (response) {
+
+            console.log(response);
+              // Update new user balance
+
+             console.log("new user balance deposit response: ", response );
+             var newUserBalance = response.newUserBalance;
+            $("#userBalance").text(newUserBalance);
+            },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
+    }
+
+//FIXME: Is this the best way to update the gui after post request
+     $(document).ready(function () {
+        // Retrieve user ID
+        $.ajax({
+            type: "GET",
+            url: "/home/userId",
+          success: function (response) {
+            console.log("Response from server after op:", response);
+            $("#userBalance").text(response.newUserBalance);
+        },
+            error: function (xhr, status, error) {
+                console.error(error);
+            }
+        });
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+
+</html>

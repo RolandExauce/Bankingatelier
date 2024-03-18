@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+/* css reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.navbar {
+  background-color: #a10202de;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  height: 100px;
+}
+
+/* logo text */
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Logout button styles */
+.navbar-logout button {
+  background-color: #fff;
+  color: #a10202de;
+  border: none;
+  padding: 12px 20px;
+  font-size: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 25px;
+}
+
+/* Hover effect for logout button */
+.navbar-logout button:hover {
+  background-color: #ff5d5dde; /* Change background color on hover */
+  color: #fff;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.container h1,
+.container h2 {
+  text-align: center;
+}
+
+.container h1 {
+  margin-top: 1em;
+  font-size: 3.5rem;
+  text-align: center;
+  color: rgb(219, 0, 0);
+}
+
+.container h2 {
+  color: rgb(219, 0, 0);
+  text-align: center;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+  font-size: 2rem;
+}
+
+/* some style for input fields */
+.amount-inputs {
+  padding: 18px 15px;
+  border-radius: 30px;
+  border: 1px solid #ff5d5dde;
+}
+
+.amount-inputs::placeholder {
+  text-align: center; /* placeholder text center */
+}
+
+/* Add the following CSS rules to your existing stylesheet */
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 2em; /* Adjust margin as needed */
+}
+
+.button-container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 10px; /* Adjust margin as needed */
+}
+
+.button-container form input {
+  margin-bottom: 35px; /* Add space between input and button */
+}
+
+.button-container button {
+  padding: 15px 20px;
+  border-radius: 25px;
+  font-size: 30px;
+  font-weight: bold;
+  background-color: #ff5d5dde;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.button-container button:hover {
+  background-color: #a10202de;
+}

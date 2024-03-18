@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: BankingAtelier
+
+  datasource:
+    username: root
+    password: n3zWFUbHLc4hY7Z
+    url: jdbc:mysql://localhost:3306/bankingatelier
+
+  jpa:
+    hibernate:
+      ddl-auto: 'update' # hibernate will create necessary tables based on entity mappings
+    show-sql: true
+
+server:
+  port: 8081
+
+
+

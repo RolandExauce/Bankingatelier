@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<!-- login page -->
+<html lang="en"   xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>login</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="_csrf" content="${_csrf.token}"/>
+	<!-- default header name is X-CSRF-TOKEN -->
+	<meta name="_csrf_header" content="${_csrf.headerName}"/>
+
+	<!-- loading with thymeleaf does not always work?
+	-->
+	<link rel="icon" type="image/svg" th:href="@{/images/atelierSVG.svg}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/fonts/font-awesome-4.7.0/css/font-awesome.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/util.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+
+	<!--
+
+	<link rel="icon" type="image/svg" href="/static/images/atelierSVG.svg" />
+	<link rel="stylesheet" type="text/css" href="/static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/util.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+
+	-->
+
+</head>
+<body>
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-pic" data-tilt>
+
+					<!--
+					<img src="/static/images/atelierSVG.svg" alt="SVG">
+					-->
+
+					<img th:src="@{/images/atelierSVG.svg}" alt="SVG">
+
+
+				</div>
+
+				<form class="login100-form validate-form" th:action="@{/home/authenticate}" method="post"  th:object="${user}">
+					<span class="login100-form-title">
+						Login to Account
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate="username required">
+						<input class="input100" type="text" name="username" placeholder="Username" autocomplete="off">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-user" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input validate-input" data-validate="password required">
+						<input class="input100" type="password" name="password" placeholder="Password"
+							autocomplete="off">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button type="submit" class="login100-form-btn">
+							Login
+						</button>
+					</div>
+
+					<div class="text-center p-t-12">
+
+						<span th:if="${param.error}" style="color: red; display: block;">
+							Wrong credentials
+						</span>
+
+
+						<span class="txt1">
+							Forgot
+						</span>
+						<a class="txt2" href="#">
+							Username / Password?
+						</a>
+					</div>
+
+					<div class="text-center p-t-136">
+						<!-- <a class="txt2" href="./dashboard.html"> -->
+						<a class="txt2" th:href="@{/home/registration}">
+							Create your Account
+							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
